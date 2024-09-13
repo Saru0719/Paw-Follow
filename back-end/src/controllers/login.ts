@@ -25,3 +25,4 @@ export const Login = async (req: Request, res: Response) => {
         res.status(401).json({ message: 'Invalid credentials' });
     }
 };
+
