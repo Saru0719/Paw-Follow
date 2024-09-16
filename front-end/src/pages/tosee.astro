@@ -13,24 +13,30 @@ import { TbVaccine } from "react-icons/tb";
     <nav
       class="fixed bottom-0 w-full text-7xl flex justify-between border-t border-black px-2 py-4 bg-white md:hidden"
     >
-      <span>
-        <GiPawHeart />
-      </span>
-      <span>
-        <TbVaccine />
-      </span>
-      <span>
-        <HiMiniVideoCamera />
-      </span>
-      <span>
-        <AiOutlineLogout />
-      </span>
+      <a href="/mypets">
+        <span>
+          <GiPawHeart />
+        </span>
+      </a>
+      <a href="/health">
+        <span>
+          <TbVaccine />
+        </span>
+      </a>
+      <a href="/tosee">
+        <span>
+          <HiMiniVideoCamera />
+        </span>
+      </a>
+      <a href="#">
+        <span>
+          <AiOutlineLogout />
+        </span>
+      </a>
     </nav>
 
-    <section
-      class="min-h-screen w-full flex flex-col items-center md:bg-cover"
-    >
-      <div class="h-1/4 w-full flex items-center justify-center md:hidden">
+    <section class="min-h-screen w-full flex flex-col items-center md:bg-cover">
+      <div class="h-1/4 w-full flex items-center justify-center md:hidden border border-black sticky top-0 bg-white">
         <h1
           class="text-6xl font-semibold bg-white p-2 rounded-md"
           style="font-family: 'Kavoon', cursive;"
@@ -67,76 +73,107 @@ import { TbVaccine } from "react-icons/tb";
       <nav
         class="w-full md:flex justify-center items-center text-7xl gap-20 hidden"
       >
-        <span
-          class="bg-white rounded-md flex flex-col items-center cursor-pointer"
-        >
-          <GiPawHeart />
-          <span class="text-2xl font-semibold">My Pets</span>
-        </span>
-        <span
-          class="bg-white rounded-md flex flex-col items-center cursor-pointer"
-        >
-          <TbVaccine />
-          <span class="text-2xl font-semibold">Health</span>
-        </span>
-        <span
-          class="bg-white rounded-md flex flex-col items-center cursor-pointer"
-        >
-          <HiMiniVideoCamera />
-          <span class="text-2xl font-semibold">To see</span>
-        </span>
+        <a href="/mypets">
+          <span
+            class="bg-white rounded-md flex flex-col items-center cursor-pointer"
+          >
+            <GiPawHeart />
+            <span class="text-2xl font-semibold">My Pets</span>
+          </span>
+        </a>
+        <a href="/health">
+          <span
+            class="bg-white rounded-md flex flex-col items-center cursor-pointer"
+          >
+            <TbVaccine />
+            <span class="text-2xl font-semibold">Health</span>
+          </span>
+        </a>
+        <a href="/tosee">
+          <span
+            class="bg-white rounded-md flex flex-col items-center cursor-pointer"
+          >
+            <HiMiniVideoCamera />
+            <span class="text-2xl font-semibold">To see</span>
+          </span>
+        </a>
       </nav>
 
       <div class="w-full p-4 flex flex-wrap gap-4 justify-center">
         <div class="w-96">
           <VideoComponent
-            title="Como cuidar a tu canino"
-            description="Aprende a cuidar a tu canino en este simple video, encontraras temas como salud, alimentacion, trato, entre otros"
-            url="https://www.youtube.com/watch?v=LZ9AKsUCcTI"
+            title="How to train your dog"
+            description="Tips to train your dog"
+            url="https://www.youtube.com/watch?v=jFMA5ggFsXU"
             client:load
           />
         </div>
         <div class="w-96">
           <VideoComponent
-            title="Como cuidar a tu canino"
-            description="Aprende a cuidar a tu canino en este simple video, encontraras temas como salud, alimentacion, trato, entre otros"
-            url="https://www.youtube.com/watch?v=LZ9AKsUCcTI"
+            title="How to tame your hamster"
+            description="Tips to tame yout hamster"
+            url="https://www.youtube.com/watch?v=RiIkUA4J3uA"
             client:load
           />
         </div>
         <div class="w-96">
           <VideoComponent
-            title="Como cuidar a tu canino"
-            description="Aprende a cuidar a tu canino en este simple video, encontraras temas como salud, alimentacion, trato, entre otros"
-            url="https://www.youtube.com/watch?v=LZ9AKsUCcTI"
+            title="How to train your cat"
+            description="Tips to train your cat"
+            url="https://www.youtube.com/watch?v=yM3n2mWZqUU"
             client:load
           />
         </div>
         <div class="w-96">
           <VideoComponent
-            title="Como cuidar a tu canino"
-            description="Aprende a cuidar a tu canino en este simple video, encontraras temas como salud, alimentacion, trato, entre otros"
-            url="https://www.youtube.com/watch?v=LZ9AKsUCcTI"
+            title="Health habits to your dog"
+            description="Tips for your dog health" 
+            url="https://www.youtube.com/watch?v=ilgM5IYjIG8&t=313s"
             client:load
           />
         </div>
         <div class="w-96">
           <VideoComponent
-            title="Como cuidar a tu canino"
-            description="Aprende a cuidar a tu canino en este simple video, encontraras temas como salud, alimentacion, trato, entre otros"
-            url="https://www.youtube.com/watch?v=LZ9AKsUCcTI"
+            title="Health habits to your hamster"
+            description="Tips for your hamster health"
+            url="https://www.youtube.com/watch?v=EqTDBc0KX_c"
             client:load
           />
         </div>
         <div class="w-96">
           <VideoComponent
-            title="Como cuidar a tu canino"
-            description="Aprende a cuidar a tu canino en este simple video, encontraras temas como salud, alimentacion, trato, entre otros"
-            url="https://www.youtube.com/watch?v=LZ9AKsUCcTI"
+            title="Health habits to yout cat"
+            description="Tips for your cat health"
+            url="https://www.youtube.com/watch?v=lArwj8ELa10"
+            client:load
+          />
+        </div>
+        <div class="w-96">
+          <VideoComponent
+            title="Things dogs love"
+            description="Learning things that your dog loves"
+            url="https://www.youtube.com/watch?v=SgCIZZodox8"
+            client:load
+          />
+        </div>
+        <div class="w-96">
+          <VideoComponent
+            title="Things hamsters love"
+            description="Learning things that your hamster loves"
+            url="https://www.youtube.com/watch?v=714uVOsOm7A"
+            client:load
+          />
+        </div>
+        <div class="w-96">
+          <VideoComponent
+            title="Things cats love"
+            description="Learning things that your cat loves"
+            url="https://www.youtube.com/watch?v=E9AMxpAim3k"
             client:load
           />
         </div>
       </div>
+      
     </section>
   </main>
 </Layout>
