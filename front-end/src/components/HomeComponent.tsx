@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createPetReq } from "../api/home";
 
 const HomeComponent: React.FC = () => {
   // Estado para controlar la visibilidad del formulario
@@ -7,6 +8,55 @@ const HomeComponent: React.FC = () => {
   // Función para alternar la visibilidad del formulario
   const toggleFormVisibility = () => {
     setIsFormVisible((prev) => !prev);
+  };
+
+  const [image_url, setImageUrl] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Crea una URL para el archivo
+      const newImageUrl = URL.createObjectURL(file);
+      setImageUrl(newImageUrl);
+
+      // Limpia la URL cuando el componente se desmonte
+      return () => URL.revokeObjectURL(newImageUrl);
+    }
+  };
+
+  const [type_of_pet, setTypeOfPet] = useState("dog");
+  const [pet_name, setPetName] = useState("");
+  const [date_of_birth, setDateOfBirth] = useState("");
+  const [gender, setGender] = useState("");
+  const [color, setColor] = useState("");
+  const [breed, setBreed] = useState("");
+  const [size, setSize] = useState("");
+  const [weight, setWeight] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    const payload = {
+      type_of_pet,
+      pet_name,
+      date_of_birth,
+      gender,
+      color,
+      breed,
+      size,
+      weight,
+      image_url,
+    };
+    let res: any;
+    try {
+      res = await createPetReq(payload);
+      window.location.href = "/mypets";
+      console.log(res);
+    } catch (err: any) {
+      console.log(err);
+      setError(err.response.data.message);
+    }
   };
 
   return (
@@ -68,6 +118,8 @@ const HomeComponent: React.FC = () => {
               name="pet-type"
               required
               className="w-full p-1 mb-4 border border-gray-300 rounded-md"
+              value={type_of_pet}
+              onChange={(e) => setTypeOfPet(e.target.value)}
             >
               <option value="dog">Dog</option>
               <option value="cat">Cat</option>
@@ -83,6 +135,8 @@ const HomeComponent: React.FC = () => {
               name="pet-name"
               required
               className="w-full p-1 mb-4 border border-gray-300 rounded-md"
+              value={pet_name}
+              onChange={(e) => setPetName(e.target.value)}
             />
 
             <label htmlFor="birth-date" className="block text-gray-700 mb-1">
@@ -94,11 +148,14 @@ const HomeComponent: React.FC = () => {
               name="birth-date"
               required
               className="w-full p-1 mb-4 border border-gray-300 rounded-md"
+              value={date_of_birth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
             />
 
             <label htmlFor="gender" className="block text-gray-700 mb-1">
               Gender:
             </label>
+
             <div className="flex gap-2">
               <div className="flex items-center mb-4">
                 <input
@@ -108,6 +165,8 @@ const HomeComponent: React.FC = () => {
                   value="male"
                   className="mr-2"
                   required
+                  checked={gender === "male"}
+                  onChange={(e)=>setGender(e.target.value)}
                 />
                 <label htmlFor="male" className="text-gray-700">
                   Male
@@ -121,6 +180,8 @@ const HomeComponent: React.FC = () => {
                   value="female"
                   className="mr-2"
                   required
+                  checked={gender === "female"}
+                  onChange={(e)=>setGender(e.target.value)}
                 />
                 <label htmlFor="female" className="text-gray-700">
                   Female
@@ -137,6 +198,8 @@ const HomeComponent: React.FC = () => {
               name="color"
               required
               className="w-full p-1 mb-4 border border-gray-300 rounded-md"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
             />
 
             <label htmlFor="breed" className="block text-gray-700 mb-1">
@@ -148,6 +211,8 @@ const HomeComponent: React.FC = () => {
               name="breed"
               required
               className="w-full p-1 mb-4 border border-gray-300 rounded-md"
+              value={breed}
+              onChange={(e) => setBreed(e.target.value)}
             />
 
             <label htmlFor="size" className="block text-gray-700 mb-1">
@@ -162,6 +227,8 @@ const HomeComponent: React.FC = () => {
                   value="small"
                   className="mr-2"
                   required
+                  checked={size === "small"}
+                  onChange={(e)=>setSize(e.target.value)}
                 />
                 <label htmlFor="small" className="text-gray-700">
                   Small
@@ -175,6 +242,8 @@ const HomeComponent: React.FC = () => {
                   value="medium"
                   className="mr-2"
                   required
+                  checked={size === "medium"}
+                  onChange={(e)=>setSize(e.target.value)}
                 />
                 <label htmlFor="medium" className="text-gray-700">
                   Medium
@@ -188,6 +257,8 @@ const HomeComponent: React.FC = () => {
                   value="large"
                   className="mr-2"
                   required
+                  checked={size === "large"}
+                  onChange={(e)=>setSize(e.target.value)}
                 />
                 <label htmlFor="large" className="text-gray-700">
                   Large
@@ -207,6 +278,8 @@ const HomeComponent: React.FC = () => {
               step="0.1"
               required
               className="w-full p-1 mb-4 border border-gray-300 rounded-md"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
             />
 
             <label htmlFor="pet-image" className="block text-gray-700 mb-1">
@@ -218,11 +291,12 @@ const HomeComponent: React.FC = () => {
               name="pet-image"
               accept="image/*"
               className="w-full p-1 mb-4 border border-gray-300 rounded-md"
+              onChange={handleFileChange}
             />
 
             <button
-              type="submit"
               className="w-full p-1 bg-black text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              onClick={handleSubmit}
             >
               Add Pet
             </button>

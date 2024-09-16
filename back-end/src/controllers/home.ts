@@ -3,13 +3,14 @@ import { pool } from '../db';
 
 //Funcion para añadir mascota
 export const Add_pets = async (req: Request, res: Response) => {
-    const { type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weigth, image_url } = req.body;
+    const { type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url } = req.body;
 
     try { 
-        await pool.query("INSERT INTO tbl_pets(type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weigth, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-         [type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weigth, image_url ]);
+        await pool.query("INSERT INTO tbl_pets(type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+         [type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url ]);
          res.json({ message: 'Pet registered successfully' });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: "try it again" });
     }
 };

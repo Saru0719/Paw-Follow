@@ -21,3 +21,5 @@ router.get("/pets/:id", authRequired, Get_pet_byId);
 router.put("/pets/:id", authRequired, Update_pet);
 
 router.delete("/pets/:id", authRequired, Delete_pet);
+
+export default router;

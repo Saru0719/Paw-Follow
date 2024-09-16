@@ -17,6 +17,7 @@ function LoginComponent() {
       window.location.href = "/home";
       console.log(res);
     } catch (err: any) {
+      console.log(err)
       setError(err.response.data.message);
     }
   };
@@ -46,10 +47,10 @@ function LoginComponent() {
               </label>
               <input
                 type="email"
-                id="email"
-                name="email"
                 required
                 className="w-full p-3 mb-4 border border-gray-300 rounded"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
 
               <label htmlFor="password" className="block mb-2 text-gray-600">
@@ -57,15 +58,15 @@ function LoginComponent() {
               </label>
               <input
                 type="password"
-                id="password"
-                name="password"
                 required
                 className="w-full p-3 mb-4 border border-gray-300 rounded"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <button
-                type="submit"
                 className="w-full p-3 bg-black text-white rounded hover:bg-gray-800"
+                onClick={handleSubmit}
               >
                 Log in
               </button>

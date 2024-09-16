@@ -5,5 +5,13 @@ interface UserData {
   password: string;
 }
 
-export const registerReq = (user: UserData) => axios.post("/register", user);
-export const loginReq = (user: UserData) => axios.post("/login", user);
+interface UserRegister{
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  cellphone: string;
+}
+
+export const loginReq = (userLogin: UserData) => axios.post("/login", userLogin);
+export const registerReq = (userRegister: UserRegister) => axios.post("/register", userRegister);
