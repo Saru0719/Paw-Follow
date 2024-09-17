@@ -1,21 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { deletePetReq, getPetByIdReq } from "../api/home";
 
-function MyPetsComponent() {
+interface Props {
+  id: number;
+  name: string;
+  type: string;
+  birth: string;
+  gender: string;
+  color: string;
+  breed: string;
+  size: string;
+  weight: string;
+  imgUrl: string;
+}
+
+function MyPetsComponent(props: Props) {
+  const { id, name, imgUrl, birth,gender, type, color, breed, size, weight } = props;
   const [showDetails, setShowDetails] = useState(false);
   const handleShowDetails = () => {
     setShowDetails(!showDetails);
   };
+  const handleDelete = async () => {
+    try {
+      window.location.href='/mypets'
+      await deletePetReq(id);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-2 text-4xl font-semibold">
         <img
           onClick={handleShowDetails}
           className="w-36 h-36 object-cover object-center rounded-full cursor-pointer md:w-48 md:h-48"
-          src="https://tvazteca.brightspotcdn.com/dims4/default/1029d5c/2147483647/strip/true/crop/1920x1080+0+0/resize/928x522!/format/jpg/quality/90/?url=http%3A%2F%2Ftv-azteca-brightspot.s3.amazonaws.com%2F38%2Fe6%2F7b33cdd042d5a378d56a7f81fa73%2Fperritos-primeros-auxilios.jpg"
+          src={imgUrl}
           alt=""
         />
-        <h2 className="bg-white p-2 rounded-md">Max</h2>
+        <h2 className="bg-white p-2 rounded-md">{name}</h2>
       </div>
 
       {showDetails && (
@@ -33,20 +57,33 @@ function MyPetsComponent() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between flex-wrap">
                 <p className="font-semibold">Name: </p>
-                <p>Max</p>
+                <p>{name}</p>
               </div>
               <div className="flex justify-between flex-wrap">
-                <p className="font-semibold">Age: </p>
-                <p>2 years</p>
+                <p className="font-semibold">Date of birth: </p>
+                <p>{birth}</p>
+              </div>
+              <div className="flex justify-between flex-wrap">
+                <p className="font-semibold">Gender: </p>
+                <p>{gender}</p>
+              </div>
+              <div className="flex justify-between flex-wrap">
+                <p className="font-semibold">Color: </p>
+                <p>{color}</p>
               </div>
               <div className="flex justify-between flex-wrap">
                 <p className="font-semibold">Breed: </p>
-                <p>Golden Retriever</p>
+                <p>{breed}</p>
+              </div>
+              <div className="flex justify-between flex-wrap">
+                <p className="font-semibold">Size: </p>
+                <p>{size}</p>
               </div>
               <div className="flex justify-between flex-wrap">
                 <p className="font-semibold">Weight: </p>
-                <p>25kg</p>
+                <p>{weight}</p>
               </div>
+              <button onClick={handleDelete} className="bg-red-500 py-2 rounded-lg">Delete</button>
             </div>
           </div>
         </div>

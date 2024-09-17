@@ -14,7 +14,7 @@ interface PetData {
 
   export const createPetReq = (pet: PetData) => axios.post("/pets", pet);
   export const getAllPetsReq = () => axios.get("/pets");
-  export const getPetByIdReq = (petId: string) => axios.get(`/pets/${petId}`);
+  export const getPetByIdReq = (petId: number) => axios.get(`/pets/${petId}`);
   export const updatePetReq = (petId: string, pet: PetData) => axios.put(`/pets/${petId}`, pet);
-  export const deletePetReq = (petId: string) => axios.delete(`/pets/${petId}`);
+  export const deletePetReq = (petId: number) => axios.delete(`/pets/${petId}`);
   
