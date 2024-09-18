@@ -25,9 +25,9 @@ Asegúrate de tener instalados los siguientes programas en tu máquina:
    Clona el repositorio de CodeAndo desde GitHub a tu máquina local.
 
    ```sh
-   git clone https://github.com/tu-usuario/codeando.git
-   cd codeando
+   git clone https://github.com/Saru0719/Paw-Follow.git
+   cd Paw-Follow
 2. **Contruir el proyecto en Docker**
     Utiliza el comando: 
     ```sh
-    docker-compose up --build
+    docker-compose up
