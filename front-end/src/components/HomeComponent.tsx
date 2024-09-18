@@ -55,7 +55,7 @@ const HomeComponent: React.FC = () => {
           <h1 className="text-5xl mb-10 text-gray-900 flex font-extrabold" style={{ fontFamily: "'Kavoon', cursive" }}>
             Paw-Follow
           </h1>
-          <p className="text-lg md:text-lg text-gray-800 mb-6 flex items-center">Welcome to Paw-Follow, Sara!</p>
+          <p className="text-lg md:text-lg text-gray-800 mb-6 flex items-center">Welcome to Paw-Follow</p>
           <div className="flex items-center justify-center mb-8">
             <img src="https://cdn-icons-png.flaticon.com/512/21/21545.png" alt="paw icon" className="w-50 h-50 md:w-50 md:h-50 lg:w-85 lg:h-85" />
           </div>

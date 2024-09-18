@@ -12,13 +12,14 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 //Middleware que parsea los JSON en las peticiones
-app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:4321",
     credentials: true,
   })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Ruta para autenticación
@@ -26,7 +27,7 @@ app.use(loginRoutes);
 app.use(homeRoutes);
 app.use(HealthRoutes);
 
-const PORT: number = 3000;
+const PORT = 3000;
 
 //Ejecución
 app.listen(PORT, () => {
