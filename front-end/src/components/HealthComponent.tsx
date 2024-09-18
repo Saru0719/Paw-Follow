@@ -1,29 +1,22 @@
 import React, { useState } from "react";
+import { addHealthReq } from "../api/healt";
 
 const HealthComponent: React.FC = () => {
-  const [date, setDate] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [pet_name, setPetName] = useState("")
+  const [date_h, setDate] = useState("");
+  const [descriptions, setDescription] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    // Validar los campos
-    if (!date || !description) {
-      setError("Please fill out both fields.");
-      return;
-    }
-
-    const payload = { date, description };
+    const idOwner = parseInt(localStorage.getItem("idOwner"));
+    const payload = { pet_name, date_h, descriptions, idOwner };
 
     try {
       // Aquí deberías realizar la solicitud a tu API
-      // await apiCall(payload);
-
-      // Limpiar los campos después de un envío exitoso
-      setDate("");
-      setDescription("");
+      window.location.href = '/viewHealthPage'
+      await addHealthReq(payload)
       alert("Health entry submitted successfully!");
     } catch (err: any) {
       setError(
@@ -53,7 +46,7 @@ const HealthComponent: React.FC = () => {
           >
             Paw-Follow
           </h1>
-          
+
           <div className="w-full flex flex-col items-center shadow-gray-300 shadow-md rounded-md p-6 bg-white">
             <h2 className="text-3xl md:text-4xl mb-4 text-gray-900 font-bold">
               Health Log
@@ -62,6 +55,18 @@ const HealthComponent: React.FC = () => {
             {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
             <form className="w-full" onSubmit={handleSubmit}>
+              <label htmlFor="petName" className="block mb-2 text-gray-600">
+                Pet Name:
+              </label>
+              <input
+                type="text"
+                id="petName"
+                name="petName"
+                value={pet_name}
+                onChange={(e) => setPetName(e.target.value)}
+                required
+                className="w-full p-3 mb-4 border border-gray-300 rounded"
+              />
               <label htmlFor="date" className="block mb-2 text-gray-600">
                 Date:
               </label>
@@ -69,7 +74,7 @@ const HealthComponent: React.FC = () => {
                 type="date"
                 id="date"
                 name="date"
-                value={date}
+                value={date_h}
                 onChange={(e) => setDate(e.target.value)}
                 required
                 className="w-full p-3 mb-4 border border-gray-300 rounded"
@@ -81,7 +86,7 @@ const HealthComponent: React.FC = () => {
               <textarea
                 id="description"
                 name="description"
-                value={description}
+                value={descriptions}
                 onChange={(e) => setDescription(e.target.value)}
                 required
                 rows={4}
@@ -91,6 +96,7 @@ const HealthComponent: React.FC = () => {
               <button
                 type="submit"
                 className="w-full p-3 bg-black text-white rounded hover:bg-gray-800"
+                onClick={handleSubmit}
               >
                 Submit
               </button>

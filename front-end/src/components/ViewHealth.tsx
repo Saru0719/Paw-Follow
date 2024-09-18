@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import HealthCard from "./HealthCard";
+import { getAllHealthReq } from "../api/healt";
 import { AiOutlineLogout } from "react-icons/ai";
 import { BiSolidMessageRoundedError } from "react-icons/bi";
 import { GiPawHeart } from "react-icons/gi";
 import { HiMiniVideoCamera } from "react-icons/hi2";
 import { TbVaccine } from "react-icons/tb";
-import PetsList from "./PetsList";
 import { logoutReq } from "../api/auth";
 import { MdAddCircle } from "react-icons/md";
 
-function MyPetsPage() {
+interface DataHealth {
+  id: number;
+  pet_name: string;
+  date_h: string;
+  descriptions: string;
+  idOwner: number;
+}
+function ViewHealth() {
+  const [health, setHealth] = useState<DataHealth[]>([]);
+  useEffect(() => {
+    const id = parseInt(localStorage.getItem("idOwner"));
+    const fetch = async () => {
+      try {
+        const res = await getAllHealthReq(id);
+        setHealth(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetch();
+  }, []);
+
   const logout = async () => {
     // Aquí va la lógica para desloguear al usuario
     try {
@@ -20,7 +42,7 @@ function MyPetsPage() {
   };
   return (
     <>
-      <main className="h-screen w-full bg-white">
+      <main className="min-h-screen w-full bg-white">
         <nav className="fixed bottom-0 w-full text-7xl flex justify-between border-t border-black px-2 py-4 bg-white md:hidden">
           <a href="/mypets">
             <span>
@@ -44,18 +66,10 @@ function MyPetsPage() {
           </a>
         </nav>
 
-        <section
-          className="h-screen w-full flex flex-col items-center md:bg-cover"
-          style={{
-            backgroundImage:
-              "url('https://media.istockphoto.com/id/1214700549/es/vector/pata-imprimir-gato-perro-rastro-de-la-mascota-del-cachorro-estilo-plano-vector-de-stock.jpg?s=612x612&w=0&k=20&c=nKqKMaelM5EE7J2PuFrkMQy3r088BRQNMEQ9YCegP-4=')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="h-1/4 w-full flex items-start justify-center md:hidden">
+        <section className="min-h-screen w-full flex flex-col items-center md:bg-cover">
+          <div className="h-1/4 w-full flex items-center justify-center md:hidden border border-black sticky top-0 bg-white">
             <h1
-              className="text-6xl font-semibold p-2 rounded-md w-full text-center bg-white border-b border-black"
+              className="text-6xl font-semibold bg-white p-2 rounded-md"
               style={{ fontFamily: "Kavoon", fontStyle: "cursive" }}
             >
               Paw-Follow
@@ -75,12 +89,14 @@ function MyPetsPage() {
             <div className="hidden md:flex items-center text-4xl justify-end gap-4 w-1/3">
               <div className="flex flex-col items-center cursor-pointer">
                 <BiSolidMessageRoundedError />
+                <span className="text-2xl">About Us</span>
               </div>
               <div
                 onClick={logout}
                 className="flex flex-col items-center cursor-pointer"
               >
                 <AiOutlineLogout />
+                <span className="text-2xl">Log Out</span>
               </div>
             </div>
           </header>
@@ -106,15 +122,26 @@ function MyPetsPage() {
             </a>
           </nav>
 
-          <div className="w-full flex flex-wrap items-start justify-center flex-1 h-full p-4 gap-6 md:py-14">
-            <PetsList />
+          <div className="w-full p-4 flex flex-wrap gap-4 justify-center">
+            <section className="w-full flex gap-2 flex-wrap">
+              {health.map((health) => (
+                <HealthCard
+                  key={health.id}
+                  id={health.id}
+                  pet_name={health.pet_name}
+                  date={health.date_h}
+                  description={health.descriptions}
+                  idOwner={health.idOwner}
+                />
+              ))}
+            </section>
           </div>
         </section>
 
-        <a href="/home">
+        <a href="/health">
           <button className="w-full justify-center text-6xl fixed bottom-32 md:bottom-10 flex flex-col items-center transition-all duration-300 ease-in hover:scale-105">
             <MdAddCircle />
-            <span className="text-xl">Add Pet</span>
+            <span className="text-xl">Add Health</span>
           </button>
         </a>
       </main>
@@ -122,4 +149,4 @@ function MyPetsPage() {
   );
 }
 
-export default MyPetsPage;
+export default ViewHealth;

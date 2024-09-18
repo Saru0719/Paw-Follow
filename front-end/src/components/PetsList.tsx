@@ -18,11 +18,12 @@ function PetsList() {
   const [pets, setPets] = useState<PetData[]>([]);
   const [error, setError] = useState("");
   useEffect(() => {
+    const idOwner = localStorage.getItem("idOwner");
     // Funcion asincrona para obtener los posts
     const fetchPosts = async () => {
       try {
         // Llamada a la funcion getPosts de la API
-        const res = await getAllPetsReq();
+        const res = await getAllPetsReq(parseInt(idOwner));
         // Asignacion de los posts obtenidos al estado posts
         console.log(res.data);
         setPets(res.data);

@@ -14,7 +14,9 @@ function LoginComponent() {
     try {
       res = await loginReq(payload);
       localStorage.setItem("isLogin", "true");
-      window.location.href = "/home";
+      localStorage.setItem("idOwner", res.data[0]);
+      localStorage.setItem("name", res.data[1]);
+      window.location.href = "/mypets";
       console.log(res);
     } catch (err: any) {
       console.log(err)

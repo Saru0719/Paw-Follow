@@ -25,6 +25,7 @@ const HomeComponent: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    const idOwner = parseInt(localStorage.getItem("idOwner"))
     const payload = {
       type_of_pet: typeOfPet,
       pet_name: petName,
@@ -35,6 +36,7 @@ const HomeComponent: React.FC = () => {
       size,
       weight,
       image_url: imageUrl,
+      idOwner
     };
     try {
       const res = await createPetReq(payload);

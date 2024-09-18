@@ -31,12 +31,13 @@ export const Login = async (req: Request, res: Response) => {
     if ((rows as any[]).length === 0) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    const userId = (rows as any[])[0].idUser;
+    const idOwner = (rows as any[])[0].id;
+    const nameOwner = (rows as any[])[0].name;
     // Creacion del token de acceso
     const token = await createAccessToken({ email });
     // Envio del token en la respuesta
     res.cookie("accessToken", token, { httpOnly: true });
-    res.json({ message: "Logged successfully" });
+    res.json([idOwner, nameOwner]);
   } catch {
     res.status(401).json({ message: "Invalid credentials" });
   }
@@ -44,13 +45,13 @@ export const Login = async (req: Request, res: Response) => {
 
 //Funcion para cerrar sesión
 export const logout = async (req: Request, res: Response) => {
-    try {
-      // Eliminacion de la cookie del token de acceso
-      res.clearCookie("accessToken");
-      // Respuesta de exito
-      return res.status(200).json({ message: "User logged out successfully" });
-    } catch (error) {
-      // Respuesta de error
-      return res.status(500).json({ message: "Error" });
-    }
-  };
+  try {
+    // Eliminacion de la cookie del token de acceso
+    res.clearCookie("accessToken");
+    // Respuesta de exito
+    return res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    // Respuesta de error
+    return res.status(500).json({ message: "Error" });
+  }
+};

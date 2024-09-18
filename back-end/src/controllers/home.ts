@@ -3,11 +3,11 @@ import { pool } from '../db';
 
 //Funcion para añadir mascota
 export const Add_pets = async (req: Request, res: Response) => {
-    const { type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url } = req.body;
+    const { type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url, idOwner } = req.body;
 
     try { 
-        await pool.query("INSERT INTO tbl_pets(type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-         [type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url ]);
+        await pool.query("INSERT INTO tbl_pets(type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url, idOwner) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+         [type_of_pet, pet_name, date_of_birth, gender, color, breed, size, weight, image_url, idOwner ]);
          res.json({ message: 'Pet registered successfully' });
     } catch (error) {
         console.log(error)
@@ -18,7 +18,7 @@ export const Add_pets = async (req: Request, res: Response) => {
 // Función para obtener todas las mascotas
 export const Get_all_pets = async (req: Request, res: Response) => {
     try {
-        const [rows] = await pool.query("SELECT * FROM tbl_pets");
+        const [rows] = await pool.query("SELECT * FROM tbl_pets WHERE idOwner = ?", [req.params.id]);
         res.json(rows);
     } catch (error) {
         console.error(error); // Log the error for debugging

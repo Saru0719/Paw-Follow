@@ -4,12 +4,4 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), tailwind()],
-  output: 'server',
-  adapter: node({
-    mode: 'standalone'
-  }),
-  server: {
-    // @ts-ignore
-    middleware: [authMiddleware]
-  }
 });

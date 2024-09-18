@@ -8,15 +8,15 @@ import VideoComponent from "./VideoComponent";
 import { logoutReq } from "../api/auth";
 
 function Tosee() {
-    const logout = async () => {
-        // Aquí va la lógica para desloguear al usuario
-        try {
-          window.location.href = "/";
-          await logoutReq();
-        } catch (error) {
-          console.log(error);
-        }
-      };
+  const logout = async () => {
+    // Aquí va la lógica para desloguear al usuario
+    try {
+      window.location.href = "/";
+      await logoutReq();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <main className="min-h-screen w-full bg-white">
@@ -26,7 +26,7 @@ function Tosee() {
               <GiPawHeart />
             </span>
           </a>
-          <a href="/health">
+          <a href="/viewHealthPage">
             <span>
               <TbVaccine />
             </span>
@@ -68,7 +68,10 @@ function Tosee() {
                 <BiSolidMessageRoundedError />
                 <span className="text-2xl">About Us</span>
               </div>
-              <div onClick={logout} className="flex flex-col items-center cursor-pointer">
+              <div
+                onClick={logout}
+                className="flex flex-col items-center cursor-pointer"
+              >
                 <AiOutlineLogout />
                 <span className="text-2xl">Log Out</span>
               </div>
@@ -82,7 +85,7 @@ function Tosee() {
                 <span className="text-2xl font-semibold">My Pets</span>
               </span>
             </a>
-            <a href="/health">
+            <a href="/viewHealthPage">
               <span className="bg-white rounded-md flex flex-col items-center cursor-pointer">
                 <TbVaccine />
                 <span className="text-2xl font-semibold">Health</span>

@@ -3,6 +3,7 @@ import express from "express";
 import loginRoutes from "./routes/login.routes";
 import cors from "cors";
 import homeRoutes from "./routes/home.routes";
+import HealthRoutes from "./routes/health.routes";
 
 //Importacion de cookieParser
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 //Ruta para autenticación
 app.use(loginRoutes);
 app.use(homeRoutes);
+app.use(HealthRoutes);
 
 const PORT: number = 3000;
 

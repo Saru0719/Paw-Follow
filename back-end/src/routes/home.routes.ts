@@ -14,7 +14,7 @@ const router = Router();
 //Rutas
 router.post("/pets", authRequired, Add_pets);
 
-router.get("/pets", authRequired, Get_all_pets);
+router.get("/pets/owner/:id", authRequired, Get_all_pets);
 
 router.get("/pets/:id", authRequired, Get_pet_byId);
 

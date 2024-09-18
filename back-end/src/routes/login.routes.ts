@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Login, Register } from '../controllers/login';
+import { Login, Register, logout } from '../controllers/login';
 
 //Instanciacion de router
 const router = Router();
@@ -8,5 +8,7 @@ const router = Router();
 router.post('/register', Register);
 
 router.post('/login', Login);
+
+router.post('/logout', logout);
 
 export default router;
