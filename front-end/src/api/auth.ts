@@ -15,3 +15,4 @@ interface UserRegister{
 
 export const loginReq = (userLogin: UserData) => axios.post("/login", userLogin);
 export const registerReq = (userRegister: UserRegister) => axios.post("/register", userRegister);
+export const logoutReq = () => axios.post("/logout");

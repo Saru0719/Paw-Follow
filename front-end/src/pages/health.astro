@@ -1,6 +1,10 @@
 ---
 import HealthComponent from "../components/HealthComponent";
 import Layout from "../layouts/Layout.astro";
+const token = Astro.cookies.get("accessToken")?.value;
+if(!token){
+  return Astro.redirect("/");
+}
 ---
 
 <Layout title="Health Log Page">
